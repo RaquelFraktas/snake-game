@@ -1,17 +1,15 @@
-// import * as React from 'react';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import Form from './form'
+import Auth from './auth'
 
 
-export default function Registration(){
+export default function LogIn(){
   const [showForm, setShowForm]= useState(false);
   const [showButton, setShowButton]= useState(true);
 
   
   const displayForm = (e) => {
     setShowForm(!showForm);
-    console.log(e.classList)
     setShowButton(!showButton)
   }
 
@@ -35,6 +33,6 @@ export default function Registration(){
         </Button>
       </>
     }
-    {showForm && <Form />}
+    {showForm && <Auth />}
   </>
 }
