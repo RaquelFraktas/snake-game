@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux'
+import { submitSignUp, submitLogin, clearErrors } from '../redux/actionCreators';
 
 
-function Auth({props}) {
+function Auth(props) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [signUp, setSignUp] = useState(false)
+  const [logIn, setLogIn] = useState(false)
   const [invalidPassword, setInvalidPassword] = useState(false)
+  const [showForm, setShowForm]= useState(false);
+  const [showButton, setShowButton]= useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault()
     signUp ? validForSignUp() : props.submitLogin({username, password})
+  }
+
+  const displayForm = (e) => {
+    setShowForm(!showForm);
+    setShowButton(!showButton)
   }
 
   const validForSignUp =() =>!invalidPassword && props.submitSignUp({username, password})
@@ -18,9 +28,33 @@ function Auth({props}) {
 
 
   return <>
-    <div className="row">
+
+    { showButton && <>
+        <Button
+        className="btn btn-lg custom-button"
+        role="button"
+        value ="Log In"
+        onClick={displayForm}
+        >
+          Log in
+        </Button>
+      
+        <Button
+          className="btn btn-lg custom-button ms-4"
+          role="button"
+          value="Create"
+          onClick={displayForm}
+        >
+          Create a username
+        </Button>
+      </>
+    } 
+    
+
+    { showForm && 
+      <div className="row">
         <div className="col-sm-12 col-lg-6 offset-lg-3">
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit= {handleSubmit} >
             <div className="form-group">
               <label htmlFor="username">Username</label>
               <input
@@ -37,12 +71,12 @@ function Auth({props}) {
               <label htmlFor="password">Password</label>
               <input
                 type="password"
-                name="ingredients"
+                name="password"
                 id="password"
                 className="form-control"
                 required
                 value={password} 
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               
             </div>
@@ -53,7 +87,9 @@ function Auth({props}) {
           </form>
         </div>
       </div>
-    </>
+      
+    }
+  </>
 
 }
 

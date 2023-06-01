@@ -1,5 +1,5 @@
 import * as React from 'react'
-import LogIn from './login'
+import Auth from './auth'
 
 
 export default function home() {
@@ -12,7 +12,7 @@ export default function home() {
           Please log in 
         </p>
         <hr className="my-4" />
-        <LogIn />
+        <Auth />
       </div>
     </div>
   </div>
