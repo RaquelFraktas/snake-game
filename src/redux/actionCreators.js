@@ -35,7 +35,7 @@ export const submitLogin = (user) =>{
   .then(response => {
     if(!response.errors){
       localStorage.token = response.token
-      dispatch({type: "SET_USER", payload: response.user})
+      dispatch({type: "SET_USER", payload: response.user.username})
     } else {
       dispatch({type: "ERROR", payload: response.errors})
     }
@@ -44,3 +44,16 @@ export const submitLogin = (user) =>{
 
 
 export const clearErrors = () => ({type:"CLEAR_ERROR"})
+
+export const autoLogin = () => {
+  return dispatch => fetch (api + "/logged_in",{
+    headers: {
+      'Authorization' : localStorage.token
+    }
+  })
+  .then(res => res.json())
+  .then(response => {
+    localStorage.token = response.token
+    dispatch({type: "SET_USER", payload: response.user.username})
+  })
+}
