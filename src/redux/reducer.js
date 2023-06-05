@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+const initialUser = {
+  username: ""
+}
+
 const initialState = {
   users : [],
-  loggedInUser : null
+  user : initialUser
 
 }
+
+
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
@@ -13,10 +19,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         users :[...state.users, action.payload]
       };
-    
-    
+    case "SET_USER":
+      return {...state, user: action.payload};
     default:
-      return {...state};
+      return state;
   }
 }
 
