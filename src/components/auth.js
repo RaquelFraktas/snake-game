@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import { submitSignUp, submitLogin, clearErrors } from '../redux/actionCreators';
 
 
+
 function Auth(props) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [signUp, setSignUp] = useState(false)
-  const [logIn, setLogIn] = useState(false)
+  // const [logIn, setLogIn] = useState(false)
   const [invalidPassword, setInvalidPassword] = useState(false)
   const [showForm, setShowForm]= useState(false);
   const [showButton, setShowButton]= useState(true);
@@ -16,11 +17,16 @@ function Auth(props) {
   const handleSubmit = (e) => {
     e.preventDefault()
     signUp ? validForSignUp() : props.submitLogin({username, password})
+    setShowForm(!showForm);
   }
 
   const displayForm = (e) => {
     setShowForm(!showForm);
     setShowButton(!showButton)
+    
+    if (e.target.value === "create-username"){
+      setSignUp(true)
+    }
   }
 
   const validForSignUp =() =>!invalidPassword && props.submitSignUp({username, password})
@@ -30,10 +36,13 @@ function Auth(props) {
   return <>
 
     { showButton && <>
+        <p className="lead">
+          Please log in 
+        </p>
         <Button
         className="btn btn-lg custom-button"
         role="button"
-        value ="Log In"
+        value ="log-in"
         onClick={displayForm}
         >
           Log in
@@ -42,7 +51,7 @@ function Auth(props) {
         <Button
           className="btn btn-lg custom-button ms-4"
           role="button"
-          value="Create"
+          value="create-username"
           onClick={displayForm}
         >
           Create a username
@@ -87,7 +96,6 @@ function Auth(props) {
           </form>
         </div>
       </div>
-      
     }
   </>
 
