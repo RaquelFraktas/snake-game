@@ -68,3 +68,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## things to keep in mind:
+Set interval doesn't work too well with React Hooks, so we had to use a custom hook written by Dan Abramov [https://overreacted.io/making-setinterval-declarative-with-react-hooks/]
