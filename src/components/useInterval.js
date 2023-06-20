@@ -1,3 +1,4 @@
+// custom hook by dan abramov
 import { useEffect, useRef } from 'react';
 
 export function useInterval(callback, delay) {
